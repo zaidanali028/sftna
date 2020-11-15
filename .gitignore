@@ -3,5 +3,6 @@ node_modules/
 .SECRET.TXT
 sendgrid.env
 .send.js
- .sms.js
+.sms.js
+.env
 
