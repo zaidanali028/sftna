@@ -40,6 +40,9 @@
 <!-- toastr pluginjs -->
 <script src="/js/toastr.js"></script>
 <script>
+
+
+
 // Success messages
    
 <%   if(success_msg != ""){ %>
@@ -53,7 +56,27 @@
     toastr.error('<%= error_msg %>')
         
       <% } %>
+
+
+
+      //Disable button the login button when submitting the form
+
+    const loginForm = document.querySelector("#myForm");
+    const disableButton = document.querySelector("#disableMe");
+
+    loginForm.onsubmit = function(){
+
+       disableButton.disabled = true
+       disableButton.innerText = "Please Wait...."
+
+    }
   
+
+
+
+
+
+
         
   
 </script>
