@@ -1,0 +1,24 @@
+<%-include('../layouts/admin_header.ejs')%>
+<h3 class="white text-center">
+  Edit Existing Payment Of Organization Members here
+</h3>
+<hr />
+<form action="/admin/edit/payment/<%=payment._id%>" method="POST">
+  
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <select name="amount" id="" class="form-control">
+      <option value=""></option>
+      <option value="5">₵5</option>
+      <option value="10">₵10</option>
+      <option value="15">₵15</option>
+      <option value="20">₵20</option>
+      <option value="25">₵25</option>
+      <option value="30">₵30</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-info">Add Payment</button>
+</form>
+
+<%-include('../layouts/admin_footer.ejs')%>

@@ -1,0 +1,132 @@
+<%-include('../layouts/admin_header')%>
+<%-include('../layouts/flashes.ejs')%>
+
+<h1 class="text-center">Edit <%=user.name%>'s Details</h1>
+<hr>
+<div class="container">
+<div class="row flex-lg-nowrap">
+ 
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+            <form action="/admin/edituser/<%=user._id%>" method="POST" enctype="multipart/form-data">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                      <%  if(user.uploader){%>
+                      <img src="/uploads/<%=user.uploader%>" alt="" width="136px" height="136px">
+                      <%  }else{%>
+                      No Picture Currently For This User
+                      <%  } %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"><%=user.name%></h4>
+                    <p class="mb-0"><%=user.email%></p>
+                    <div class="text-muted"><small><%=user.sex%></small></div>
+                    <input type="file" class="form-control-file" id="title" name="uploader">
+                  </div>
+                  <div class="text-center text-sm-right">
+                   <%   if(user.isAdmin==1){ %>
+                    <span class="badge badge-secondary">Administrator</span>
+
+
+                    <%  }else{ %>
+                    <span class="badge badge-secondary">Not An Administrator</span>
+
+                    <%   } %>
+                    <%var date=user.date%>
+                    <% var realDate= date.toDateString()%>
+                    <div class="text-muted"><small>Joined <%=realDate%></small></div>
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a href="" class="active nav-link text-danger">Fill All Fields</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                  <form class="form" novalidate="">
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col mr-4">
+                            <div class="form-group">
+                              <label>Full Name</label>
+                              <input class="form-control" type="text" name="name" placeholder="" value="<%=user.name%>">
+                            </div>
+                          </div>
+                          <br>
+                          <div class="col mr-4">
+                            <div class="form-group">
+                              <label>Location</label>
+                              <input class="form-control" type="text" name="location" placeholder="" value="<%=user.location%>" class="">
+                            </div>
+                          </div>
+                          <div class="col mr-4">
+                            <div class="form-group">
+                              <label>E-mail</label>
+                              <input class="form-control" type="text" name="email" placeholder="" value="<%=user.email%>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <div class="form-group">
+                              <label>Phone Number</label>
+                              <input class="form-control" type="number" name="phoneNumber" value="<%=user.phoneNumber%>">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>Sex</label>
+                                Male<input type="radio" name="sex"  value="Male" id="">
+                                Female<input type="radio" name="sex" value="Female" id="">
+                              </div>
+                            </div>
+                          </div>
+                        <div class="row">
+                          <div class="col mb-3">
+                            <div class="form-group">
+                              <label>Reason For Joinin Us</label>
+                              <textarea class="form-control" rows="5"  name="reason" placeholder=""><%=user.reason%></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col d-flex justify-content-end">
+                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                    </form>
+                      </div>
+                    </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3 mb-3">
+        
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<%-include('../layouts/admin_footer')%>

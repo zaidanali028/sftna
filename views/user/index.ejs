@@ -1,0 +1,168 @@
+<%-include('../layouts/user_header.ejs')%>
+<div class="container">
+<%if (user.isAdmin===1){%>
+   <p> Welcome admin <%=user.name%> <a href="/admin" class="btn btn-success">Click Here To Access The Main Admin Panel</a></p>
+   <section>
+          
+    <div class="card mb-4">
+      
+      <div class="row">
+
+        <div class="col-md-6">
+            <%if(user.uploader){ %>
+          <img class="img-fluid rounded-left" src="/uploads/<%=user.uploader%>" alt="project image">
+          <% }else{ %>
+          <img class="img-fluid rounded-left" src="/img/sftna.jpg" alt="pateron image">
+          <% }%>
+        </div>
+
+        <div class="col-md-6 p-5 align-self-center">
+
+          <h5 class="font-weight-normal mb-3">Welcome On Board! <%=user.name%></h5>
+
+          <p class="text-muted">We are glad to have you as part of this awesome foundation,As an Administrator of this platform,you have a great responsiblility to account to,Due to our welly structured admin-panel,you get to work with payments,printing of reports,chart info,interaction with users among others with ease.
+              If you encounter any problem when working around the admin portal,simply contact Zaidan to help you out.
+              <a href="/admin" class="btn btn-success">Hop into Admin Panel</a>
+          </p>
+
+          <ul class="list-unstyled font-small mt-5 mb-0">
+            <li>
+              <p class="text-uppercase mb-2"><strong>Your Username</strong></p>
+              <p class="text-muted mb-4">Pateron <%=user.name%></p>
+            </li>
+
+            <li>
+              <p class="text-uppercase mb-2"><strong>Member Since</strong></p>
+              <p class="text-muted mb-4"><%=user.createdAt.toDateString()%></p>
+            </li>
+
+            <li>
+              <p class="text-uppercase mb-2"><strong>Why You Joined US</strong></p>
+              <p class="text-muted mb-4"><%=user.reason%></p>
+            </li>
+
+            <li>
+              <p class="text-uppercase mb-2"><strong>Your Address</strong></p>
+              <p class="text-muted mb-4"><%=user.location%></p>
+
+            </li>
+
+            <li>
+              <p class="text-uppercase mt-4 mb-2"><strong>Our Message To You</strong></p>
+              <p class="text-muted mb-4">Thank you for Joining us once again,We are much grateful.Kindly Share our platform to all your pals,so we can get to maximize our growth span and do more for the needy.Cheese #SmileForTheMeedaid™ </p>
+
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+<%}else{%>
+    <div class="container my-5">
+
+        <section>
+          
+          <div class="card mb-4">
+            
+            <div class="row">
+      
+              <div class="col-md-6">
+                  <%if(user.uploader){ %>
+                <img class="img-fluid rounded-left" src="/uploads/<%=user.uploader%>" alt="project image">
+                <% }else{ %>
+                <img class="img-fluid rounded-left" src="/img/sftna.jpg" alt="project image">
+                <% }%>
+              </div>
+      
+              <div class="col-md-6 p-5 align-self-center">
+      
+                <h5 class="font-weight-normal mb-3">Welcome On Board! <%=user.name%></h5>
+      
+                <p class="text-muted">We are glad to have you part of this awesome foundation,Currently,since our foundation is small and is now growing,we are sorry to tell you
+                    that you cannot do much as a pateron,all routes are only accessible to administrators.If you want to change your profile picture,change your email or your phone number,kindly contact the 
+                    administrators on our whatsapp platform,and if you are not part of our group on whatsapp,kindly  click on this link to join,You lodge your complains there.
+                    <a href="https://chat.whatsapp.com/BQnUjwnJ6bG6yXHKVvDPFn
+                    " class="btn btn-info">Join Us On Whatsapp</a>
+                </p>
+      
+                <ul class="list-unstyled font-small mt-5 mb-0">
+                  <li>
+                    <p class="text-uppercase mb-2"><strong>Your Username</strong></p>
+                    <p class="text-muted mb-4">Pateron <%=user.name%></p>
+                  </li>
+      
+                  <li>
+                    <p class="text-uppercase mb-2"><strong>Member Since</strong></p>
+                    <p class="text-muted mb-4"><%=user.createdAt.toDateString()%></p>
+                  </li>
+      
+                  <li>
+                    <p class="text-uppercase mb-2"><strong>Why You Joined US</strong></p>
+                    <p class="text-muted mb-4"><%=user.reason%></p>
+                  </li>
+      
+                  <li>
+                    <p class="text-uppercase mb-2"><strong>Your Address</strong></p>
+                    <p class="text-muted mb-4"><%=user.location%></p>
+
+                  </li>
+      
+                  <li>
+                    <p class="text-uppercase mt-4 mb-2"><strong>Our Message To You</strong></p>
+                    <p class="text-muted mb-4">Thank you for Joining us once again,We are much grateful.Kindly Share our platform to all your pals,so we can get to maximize our growth span and do more for the needy.Cheese #SmileForTheMeedaid™ </p>
+
+                  </li>
+      
+                </ul>
+      
+              </div>
+      
+            </div>
+      
+          </div>
+      
+        </section>
+      
+      </div>
+<%}%>
+</div>
+<div class="container">
+<div class="row">
+  <table class="table table-striped table-bordered table-responsive-md">
+    <thead>
+      <tr>
+        <td class="text-center"> Your Current Contributions To The Organization</td>
+        <td>Your Total Contributions To Help The Needy <strong>₵<%=userTotal%>.00</strong></td>
+      </tr>
+      <tr>
+        <th>Payment Date</th>
+        <th>Amount Paid</th>
+
+        <!-- <th scope="col">Amount</th> -->
+      </tr>
+    </thead>
+    <tbody>
+    <%  loggedUser.payment.forEach(pay=>{ %>
+      <tr>
+        <td><%=pay.createdAt.toDateString()%></td>
+        <td>₵<%=pay.amount%>.00</td>
+        </tr>
+        
+<%  }) %>
+
+      
+     </tbody>
+    </table>
+
+</div>
+</div>
+
+
+
+<%-include('../layouts/user_footer.ejs')%>

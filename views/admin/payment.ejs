@@ -1,0 +1,192 @@
+<%-include('../layouts/admin_header.ejs')%>
+<%-include('../layouts/flashes.ejs')%>
+
+<h1 class="text-center">All Payments here</h1>
+<hr />
+
+<div class="row ml-2">
+<div class="col-xl-3 col-md-6 mb-4">
+  <div class="card border-left-danger shadow h-100 py-2">
+    <div class="card-body">
+      <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+          <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Earnings</div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800">₵<%=sum%>.00</div>
+        </div>
+        <div class="col-auto">
+          <i class="fas fa-sort-amount-up-alt fa-2x text-gray-300" ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-xl-3 col-md-6 mb-4">
+  <div class="card border-left-warning shadow h-100 py-2">
+    <div class="card-body">
+      <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+          <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Monthly Earnings</div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800">₵<%= totalForMonth %>.00</div>
+        </div>
+        <div class="col-auto">
+          <i class="fas fa-calendar fa-2x text-gray-300" ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-xl-3 col-md-6 mb-4">
+  <div class="card border-left-success shadow h-100 py-2">
+    <div class="card-body">
+      <div class="row no-gutters align-items-center">
+        <div class="col mr-2">
+          <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Yearly Earnings</div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800">₵<%=totalForYear%>.00</div>
+        </div>
+        <div class="col-auto">
+          <i class="fas fa-globe fa-2x text-gray-300" ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container text-center">
+  <p>Members Who Had Made Payments This Month</p>
+  <!-- <hr> -->
+  <table class="table table-striped table-bordered table-responsive-md">
+    <thead>
+      <tr>
+        <th>Member's Name</th>
+        <th>Date Paid</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <%  payerArray.forEach(pay=>{%>
+          <td><%=pay.payerName%></td>
+          <td><%=pay.paymentDate%></td>
+          <td><%=pay.paymentAmount%></td>
+         
+        </tr>
+       <%   }) %>
+       <tr>
+        <td><strong>Monthly Total</strong> </td>
+        <td><%=totalForMonth%></td>
+      </tr>
+      
+
+    
+     
+
+       
+     
+
+
+    </tbody>
+  </table>
+       
+ 
+</div>
+
+</div>
+<div class="container">
+  <div class="row">
+    <%users.forEach(user=>{%>
+   <%   if(user.status===true){ %>
+
+   
+    <div class="col-sm-12">
+      <div class="avatar  text-center mg">
+        <%if(user.uploader){%>
+          <img
+          src="/uploads/<%=user.uploader%>"
+          width="130px"
+          height="130px"
+          class="img-fluid rounded-circle z-depth-1 ml-5  "
+        />
+        <%  }else{%>
+          <p class="move">
+            No Picture For This Profile
+          </p>
+         <% } %>
+      </div>
+
+
+   
+        
+      <div class="text-center mt-2">
+        <h6 class="font-weight-bold pt-2 mb-0"><%=user.name%></h6>
+        <p class="text-muted mb-0"><small><%=user.email%></small></p>
+        <p class="text-muted mb-0">
+        <%  if(user.isAdmin==1){ %>
+            Administrator
+            <% }else{%>
+            Normal Pateron
+            <%  }%>
+        </p>
+
+      </div>
+      <table class="table table-striped table-bordered table-responsive-md">
+        <thead>
+          <tr>
+            <th>Payment Date</th>
+            <th>Amount Paid</th>
+            <th>Total</th>
+
+            <!-- <th scope="col">Amount</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% let total=0 %> 
+            <%user.payment.map(pay=>{ %>
+            <td><%= new Date(pay.createdAt).toDateString() %></td>
+            <td>₵<%=pay.amount%></td>
+            <%total+=parseFloat(pay.amount)%>
+            <td><%=total%></td>
+
+            <td><a href="/admin/edit/payment/<%=pay._id%>" class="btn btn-primary"> <i class="fas fa-edit mr-2" aria-hidden="true"></i> Edit Payment</a></td>
+            <td>
+              <form action="/admin/deletepayment/<%=pay._id%>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-warning" 
+              onclick="return confirm('Are You Sure You Want To Delete This Payment?')"> <i class="fas fa-exclamation-triangle mr-2"> </i>Delete Payment</button>
+            </form>
+            </td>
+          </tr>
+          
+          <% })%>
+          <tr>
+            <td>
+              <form action="/admin/delete/user/<%=user._id%>?_method=DELETE" method="POST"">
+                <button type="submit" class="btn btn-warning"
+                onclick="return confirm('Are You Sure You Want To Delete This User?')"><i class="fas fa-user-times mr-2"></i>Delete User</button>
+            </form>
+          </td>
+
+          <td>
+            <form action="/admin/delete/user/all/<%=user._id%>?_method=DELETE" method="POST"">
+              <button type="submit" class="btn btn-info"
+              onclick="return confirm('Are You Sure You Want To Delete This User With Payment?')"> <i class="fas fa-exclamation-triangle mr-2"> </i>Delete User With Payments</button>
+          </form>
+        </td>
+
+        <td>
+          <form action="/admin/clear/user/all/<%=user._id%>?_method=DELETE" method="POST"">
+            <button type="submit" class="btn btn-danger"
+            onclick="return confirm('Are You Sure You Want To Delete All User Payment?')"><i class="fas fa-exclamation-circle mr-2"></i>Delete All User Payments</button>
+        </form>
+      </td>
+      <td><a href="/admin/edituser/<%=user._id%>" class="btn btn-primary"> <i class="fas fa-user-circle mr-2"></i>Edit User Profile
+        </a></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <% }  %>
+    <%})%>
+  </div>
+</div>
+
+<%-include('../layouts/admin_footer.ejs')%>

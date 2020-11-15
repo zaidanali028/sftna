@@ -1,0 +1,7 @@
+node_modules/
+.idea/sendgrid.env
+.SECRET.TXT
+sendgrid.env
+.send.js
+ .sms.js
+

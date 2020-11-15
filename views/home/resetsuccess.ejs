@@ -1,0 +1,16 @@
+<%-include('../layouts/home_header.ejs')%>
+<%-include('../layouts/flashes.ejs')%>
+
+<div class="container">
+    <div class="">
+        <form action="/reset/<%=user%>" method="POST">
+        <label for="newPassword">Enter New Password</label>
+        <input type="password" name="password" id="">
+        <input type="password" name="passwordConfirm" id="">
+
+            <button class="btn btn-success" type="submit">update password</button>
+
+        </form>
+    </div>
+</div>
+<%-include('../layouts/home_footer.ejs')%>

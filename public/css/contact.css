@@ -1,0 +1,21 @@
+.none{
+    border: none;
+    border-bottom: 0.1px solid green;
+}
+.crd{
+    border: 1px solid rgb(233, 230, 230);
+
+    box-shadow: 3px 3px 3px  rgb(233, 230, 230);
+    margin-bottom: 10px;
+    width: 87%;
+    padding: 20px;
+    margin: auto;
+}
+.my-bt{
+    width: 100%;
+    margin:auto;
+}
+
+#message{
+    margin-bottom: 20px;
+}

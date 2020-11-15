@@ -1,0 +1,96 @@
+<%-include('../layouts/home_register.ejs')%>
+
+<div class="container">
+<!-- <form action="/reset" method="post">
+<h1>Frogot pwd form</h1>
+<label for="emil">Your Registered E-mail</label>
+<input type="text" class="form-control" name="email">
+
+<button type="submit" class="btn btn-primary">
+        Reset Password
+    </button>
+</form> -->
+<div class="container my-5 py-5 z-depth-1">
+ 
+    <!--Section: Content-->
+    <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center">
+
+        <!--Grid column-->
+        <div class="col-md-6 text-center">
+
+          <h4 class="font-weight-bold mb-4">Reset Your Password</h4>
+
+          <div class="input-group mb-4">
+              <form action="/reset" method="POST">
+            <input type="email" class="form-control" name="email" placeholder="Enter your email address" aria-label="Enter your email address"
+              aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect" type="submit"
+                id="button-addon2">Reset Password</button>
+            </div>
+          </div>
+        </form>
+        <%let rawMsg='Hello Dear Admin,Please am finding it difficult to reset my pateron account password,can you help me out please?'%>
+        <%let MSG=encodeURI(rawMsg)%>
+          <p class="font-weight-bold">Are you having issues?  <a href="tel:+233245251510">Call Admin</a> Or <a href="https://wa.me/+233245251510?text=<%=MSG%>">Whatsapp Admin</a></p>
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+  </div>
+</div>
+<br>
+<br>
+
+<div class="container my-5 py-5 z-depth-1">
+
+
+    <!--Section: Content-->
+    <section class="dark-grey-text text-center">
+      
+      <h3 class="font-weight-bold pt-5 pb-2">Simply Fill The Form Input To Reset Your Password Or Call Admin For Assistance</h3>
+        
+      <div class="row mx-3">
+        <div class="col-md-4 px-4 mb-4">
+  
+          <div class="view">
+            <img src="https://mdbootstrap.com/img/illustrations/drawkit-drawing-man-colour.svg" class="img-fluid" alt="smaple image">
+          </div>
+  
+        </div>
+       <div class="col-md-4 px-4 mb-4">
+  
+          <div class="view">
+            <img src="https://mdbootstrap.com/img/illustrations/drawkit-phone-conversation-colour.svg" class="img-fluid" alt="smaple image">
+          </div>
+  
+        </div>
+        <div class="col-md-4 px-4 mb-4">
+  
+          <div class="view">
+            <img src="https://mdbootstrap.com/img/illustrations/app-user-colour.svg" class="img-fluid" alt="smaple image">
+          </div>
+  
+        </div>
+      </div>
+  
+    </section>
+    <!--Section: Content-->
+  
+  
+  </div>
+
+
+<%-include('../layouts/home_footer.ejs')%>

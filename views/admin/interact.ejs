@@ -1,0 +1,97 @@
+<%-include('../layouts/admin_header.ejs')%>
+<%-include('../layouts/flashes.ejs')%>
+
+<table class="table table-hover table-primary table-responsive-lg">
+  <thead>
+    <tr>
+      <th scope="col">Member's Name</th>
+      <th scope="col">Member's Phone Number</th>
+      <th scope="col">Member's Email</th>
+      <th scope="col">Call Action</th>
+      <th scope="col">Email Action</th>
+      <th scope="col">Whatsapp Action</th>
+    </tr>
+  </thead>
+  <tbody>
+      <%users.forEach(user=>{%>
+      <%  if(user.status===true){ %>
+
+        <tr>
+      
+            <td><%=user.name%></td>
+            <td><%=user.phoneNumber%></td>
+            <td><%=user.email%></td>
+            <td> <a href="tel:<%=user.phoneNumber%>"class="btn btn-success mr-4 ">  Call <%=user.name%> <i class=" fas fa-phone"></i></a></td>
+            <td>
+                <a class="btn btn-warning mr-4 " href="/admin/user/email/<%=user._id%>">Email <%=user.name%> <i class=" fas fa-envelope"></i> </a>
+            </td>
+            <td> <a href="https://wa.me/<%=user.phoneNumber%>?text=Hello%20Our%20Awesome%20Pateron%20<%=user.name%>.Hope%20You%20Are%20Doing%20Great%20Today.%20Am%20An%20Admin%20For%20Smile%20For%20The%20Needaid%20Foundation%20Who%20Wants%20To......%20"class="btn btn-danger mr-4 ">  Whatsapp <%=user.name%> <i class=" fab fa-whatsapp"></i></a></td>
+            <!-- https://wa.me/<%=user.phoneNumber%>?text=Hello%20Our%20Awesome%20Pateron%20<%=user.name%>.Hope%20You%20Are%20Doing%20Great%20Today%20Am%20An%20Admin%20In%20Smile%20For%20The%20Needaid%20Foundation%20Who%20Wants%20To......%20 -->
+      
+            
+          </tr>
+        <%} %>
+
+
+    <%  })%>
+  </tbody>
+
+</table>
+             
+                
+
+            <div class="text-center">
+
+          <a class="ml-3 mt-3 btn btn-warning mr-4 pd" href="/admin/users/email/"
+              >Email All Members<i class=" ml-2 fas fa-envelope-open"></i>
+            </a>
+            <a class="ml-3 mt-3 btn btn-warning mr-4 pd" href="/admin/users/announce/"
+              >Make An Announcement<i class=" ml-2 fas fa-bullhorn"></i>
+            </a>
+            <a class="ml-3 mt-3 btn btn-warning mr-4 pd" href="/admin/users/questionaire/"
+            >Add A Question And Answer<i class=" ml-2 fas fa-comment"></i>
+          </a>
+        </div>
+        
+
+        <div class="row">
+          <div class="container my-5 py-5 z-depth-1">
+
+
+            <!--Section: Content-->
+            <section class="dark-grey-text text-center">
+              
+              <h3 class="font-weight-bold pt-4 mb-4">You Can Talk To Any  SmileForTheNeedaid Member From Our Website Straight Into Their Inbox Or Even Place A Call</h3>
+              
+              <h5 class="font-weight-bold font-italic mb-5">Do So With No Limitations,If You Encounter Any Error,Fell Free To Dm The Website's Maintainer</h5>
+      
+              <div class="row mx-lg-5 mx-md-3 mr-4">
+                <div class="col-md-6 mb-4 ">
+                  
+                  <div class="view mb-5">
+                    <img src="/img/undraw_real_time_collaboration_c62i (1).svg" class="img-fluid" alt="smaple image">
+                  </div>
+          
+                  <h5 class="font-weight-normal text-muted">Place A Call Now And Test The Potency Of This System.Simple,Easy And Fun!</h5>
+          
+                 </div>
+                 <div class="col-md-6 mb-4">
+                  
+                  <div class="view mb-5">
+                    <img src="/img/undraw_voice_control_ofo1.svg" class="img-fluid" alt="smaple image">
+                  </div>
+          
+                  <h5 class="font-weight-normal text-muted">Whether It Being Email,Phone Call Or Whatsapp?All Are Possible With Our state Of The Art Built-in System</h5>
+          
+                </div>
+              </div>
+          
+            </section>
+            <!--Section: Content-->
+          
+          
+          </div>
+
+        </div>
+
+<%-include('../layouts/admin_footer.ejs')%>

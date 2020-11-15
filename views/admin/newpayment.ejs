@@ -1,0 +1,64 @@
+<%-include('../layouts/admin_header.ejs')%>
+<h3 class="white text-center">Add New Payments Of Organization Members here</h3>
+<hr />
+<form action="/admin/pateron/pay/" method="POST">
+  <div class="form-group">
+    <label for="status">Payer</label>
+    <select name="members" id="" class="form-control">
+      <%users.forEach(user=>{ %>
+      <%  if(user.status===true){%>
+
+      <option value="<%=user._id%>"><%=user.name%></option>
+      <%  } %>
+
+      <% })%>
+    </select>
+  </div>
+
+    <div class="form-group">
+      <label for="amount">Amount</label>
+      <select name="amount" id="" class="form-control">
+        <option value="5">₵5</option>
+        <option value="10">₵10</option>
+        <option value="15">₵15</option>
+        <option value="20">₵20</option>
+        <option value="25">₵25</option>
+        <option value="30">₵30</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add Payment</button>
+</form>
+
+<div class="container my-5 z-depth-1">
+
+
+  <!--Section: Content-->
+  <section class="dark-grey-text">
+
+    <div class="row pr-lg-5">
+      <div class="col-md-7 mb-4">
+
+        <div class="view">
+          <img src="/img/undraw_online_payments_luau.svg" class="img-fluid" alt="smaple image">
+        </div>
+
+      </div>
+      <div class="col-md-5 d-flex align-items-center">
+        <div>
+          
+          <h3 class="font-weight-bold mb-4">Simply Input Payment With Our Simple Drop-down Form</h3>
+
+        	<p>Just Select the amount,Select pateron's name and Click on Add Payments.Very Simple To Implement!</p>
+
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!--Section: Content-->
+
+
+</div>
+<%-include('../layouts/admin_footer.ejs')%>
