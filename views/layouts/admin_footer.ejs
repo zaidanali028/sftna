@@ -97,6 +97,19 @@
     }
   </script>
 
+<script>
+   const loginForm = document.querySelector("#myForm");
+    const disableButton = document.querySelector("#disableMe");
+
+    loginForm.onsubmit = function(){
+
+       disableButton.disabled = true
+       disableButton.innerText = "processing,please Wait...."
+
+    }
+  
+</script>
+
 </body>
 
 </html>

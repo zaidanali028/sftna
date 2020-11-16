@@ -284,7 +284,7 @@
 		<div class="col-md-12 wow fadeInUp crd"  id="contact" data-wow-delay=".4s">
 			<h3 class="text-success text-center mr-2">Contact Us For Any Enquiries <i class="fas fa-paper-plane"></i></h3>
 
-			<form id="contactForm" action="/contact" method="POST">
+			<form action="/contact" method="POST" id="myForm">
 				<div class="row">
 					
 						<div class="form-group">
@@ -305,7 +305,7 @@
 							<textarea id="message" name="message"  class="form-control none" rows="3" placeholder="Message" required></textarea>
 							<div class="help-block with-errors"></div>
 						</div>
-						<button type="submit"  id="form-submit" class="btn btn-md btn-common btn-form-submit btn-outline-success my-bt"> Send Message</button>
+						<button type="submit"  id="disableMe" class="btn btn-md btn-common btn-form-submit btn-outline-success my-bt"> Send Message</button>
 						<div id="msgSubmit" class="h3 text-center hidden"></div>
 						<div class="clearfix"></div>
 					

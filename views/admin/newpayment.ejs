@@ -1,7 +1,7 @@
 <%-include('../layouts/admin_header.ejs')%>
 <h3 class="white text-center">Add New Payments Of Organization Members here</h3>
 <hr />
-<form action="/admin/pateron/pay/" method="POST">
+<form action="/admin/pateron/pay/" method="POST" id="myForm">
   <div class="form-group">
     <label for="status">Payer</label>
     <select name="members" id="" class="form-control">
@@ -27,7 +27,7 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-success">Add Payment</button>
+    <button type="submit" class="btn btn-success" id="disableMe">Add Payment</button>
 </form>
 
 <div class="container my-5 z-depth-1">

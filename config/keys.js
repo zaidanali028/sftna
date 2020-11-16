@@ -1,3 +1,6 @@
+require("dotenv").config();
+
+
 module.exports={
-    dbUrl:"mongodb://localhost:27017/smile"
+    dbUrl:process.env.DB_URI
 }

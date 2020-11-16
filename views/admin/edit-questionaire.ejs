@@ -53,6 +53,7 @@
         class="text-center border border-light p-5"
         action="/admin/users/questionaire/<%=questionAndAns._id%>"
         method="POST"
+        id="myForm"
       >
         <p class="h4 mb-4 text-success">
           <i class="fas fa-question-circle">Add Recently Asked Questions</i>
@@ -78,7 +79,7 @@
         </div>
 
         <!-- Send button -->
-        <button class="btn btn-outline-success btn-block" type="submit">
+        <button class="btn btn-success btn-block" type="submit" id="disableMe">
           Update Question
         </button>
       </form>

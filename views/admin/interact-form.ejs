@@ -50,7 +50,7 @@
     <div class="col-md-6">
       
       <!-- Default form contact -->
-      <form method="POST" class="text-center border border-light p-5" action="/admin/user/email/<%=aUser._id%>">
+      <form method="POST" class="text-center border border-light p-5" action="/admin/user/email/<%=aUser._id%>" id="myForm">
         <p class="h4 mb-4">Contact <%=aUser.name%></p>
 
         
@@ -81,7 +81,7 @@
        
 
         <!-- Send button -->
-        <button class="btn btn-primary btn-block" type="submit">Send</button>
+        <button class="btn btn-primary btn-block" type="submit" id="disableMe">Send</button>
       </form>
       <!-- Default form contact -->
     </div>
