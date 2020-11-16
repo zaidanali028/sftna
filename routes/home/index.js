@@ -172,7 +172,7 @@ router.post("/register", (req, res) => {
 We Hope To Do More Together With You For The Needy,With Your Loyal Support,This Wonderful Initiative\n
  Will Thrive And Will Continue To Exist.\nYou Can Login With Your
  Credentials As Our Pateron After We Review Your Form,We Will Send You Another Email After Review,Until Then,You Cannot Login. Any Mistakes You Did During Registeration Will Be Modified By Our Admins,Contact Them On Whatsapp.\nThank You Once Again For 
- Joining The Family Cheese! #SmileForTheNeedAid™.\n\nAll Rights-SFTNA Reserved ©2020.
+ Joining The Family Cheese!! #SmileForTheNeedAid™.\n\nAll Rights-SFTNA Reserved ©2020.
              
               YOUR NAME: ${savedUser.name}
               YOUR EMAIL: ${savedUser.email}
