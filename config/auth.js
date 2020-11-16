@@ -6,7 +6,7 @@ module.exports={
         if(req.isAuthenticated()){
             return next()
         }
-      
+      //app auth
     
         req.flash('error_msg','Please login to view portal')
         res.redirect('/login')
