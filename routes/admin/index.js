@@ -667,7 +667,7 @@ router.post("/edituser/:id",ensureAuthenticated,adminAuth, (req, res) => {
     const fileObject = req.files.uploader;
     console.log(fileObject);
     fileName = new Date().getSeconds() + "-" + fileObject.name;
-    //the new Date().getSeconds+'-'+ is there to prevent duplicate picturename
+    //the new Date().getSeconds+'-'+ is there to prevent duplicate picturename{}
     fileObject.mv("public/uploads/" + fileName, (err) => {
       if (err) console.log(err);
       console.log("has something");
