@@ -37,7 +37,9 @@ mongoose
   });
 
 //express-fileupload middleware
-app.use(uploader());
+app.use(uploader({
+  useTempFiles:true
+}));
 //body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

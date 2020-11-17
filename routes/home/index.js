@@ -22,6 +22,13 @@ const smsApiKey=process.env.SMS_KEY
 let recipient = ""; //International format (233) excluding the (+)
 const sender = "SFTNA"; //11 Characters maximum
 let SMSmsg = "";
+const cloudinary=require('cloudinary').v2
+cloudinary.config({
+  cloud_name:process.env.CLOUD_NAME,
+  api_key:process.env.CLOUD_API_KEY,
+  api_secret:process.env.CLOUD_API_SECRET
+})
+
 router.get("/", (req, res) => {
  
   const Data=[
@@ -128,75 +135,77 @@ router.post("/register", (req, res) => {
     //console.log(req.files)
     if (isNotEmpty(req.files)) {
       const fileObject = req.files.uploader;
-      fileName = new Date().getSeconds() + "-" + fileObject.name;
-      //the new Date().getSeconds+'-'+ is there to prevent duplicate picturename
-      fileObject.mv("./public/uploads/" + fileName, (err) => {
-        if (err) console.log(err);
-        console.log("has something");
-      });
+      cloudinary.uploader.upload(fileObject.tempFilePath,(err,result)=>{
+        fileName=result.url
+        console.log(fileName) 
+        const newUser = new User({
+          name,
+          email,
+          password,
+          uploader: fileName,
+          sex,
+          phoneNumber: ghPhoneNum,
+          location,
+          reason,
+            // isAdmin:1,
+          //  status:true,
+          role
+          // will uncomment this if I want a user to be an admin
+        });
+
+        bcrypt.genSalt(10, (err, salt) =>
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) {
+            console.log(err);
+          } else {
+            newUser.password = hash;
+            newUser
+              .save()
+              .then((savedUser) => {
+                console.log(savedUser);
+                sgMail.setApiKey(key);
+                const msg = {
+                  to: savedUser.email, // Change to your recipient
+                  from: "developersavenue@gmail.com", // Change to your verified sender
+                  subject: "SmileForTheNeedaid Success Registeration Message",
+                  text: `
+              Thank You Very Much @${savedUser.name} For Joining SmileForTheNeedAid Foundation.\n
+  We Hope To Do More Together With You For The Needy,With Your Loyal Support,This Wonderful Initiative\n
+   Will Thrive And Will Continue To Exist.\nYou Can Login With Your
+   Credentials As Our Pateron After We Review Your Form,We Will Send You Another Email After Review,Until Then,You Cannot Login. Any Mistakes You Did During Registeration Will Be Modified By Our Admins,Contact Them On Whatsapp.\nThank You Once Again For 
+   Joining The Family Cheese!! #SmileForTheNeedAid™.\n\nAll Rights-SFTNA Reserved ©2020.
+               
+                YOUR NAME: ${savedUser.name}
+                YOUR EMAIL: ${savedUser.email}
+                YOUR PHONEno.: ${savedUser.phoneNumber}
+                YOUR LOCATION: ${savedUser.location}`, // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+                };
+                sgMail
+                  .send(msg)
+                  .then(() => {
+                    console.log("Email sent");
+                    req.flash(
+                      "success_msg",
+                      `You Have Successfully Registered as ${savedUser.name} And Can Login After We Review Your Details.Check Your Email For Confirmation`
+                    );
+                    res.redirect("/login");
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+              })
+              .catch((err) => console.log(err));
+          }
+        })
+      );
+      
+      })
+    
     } else {
       console.log("has nothing");
     }
 
-    const newUser = new User({
-      name,
-      email,
-      password,
-      uploader: fileName,
-      sex,
-      phoneNumber: ghPhoneNum,
-      location,
-      reason,
-        // isAdmin:1,
-      //  status:true,
-      role
-      // will uncomment this if I want a user to be an admin
-    });
-    bcrypt.genSalt(10, (err, salt) =>
-      bcrypt.hash(newUser.password, salt, (err, hash) => {
-        if (err) {
-          console.log(err);
-        } else {
-          newUser.password = hash;
-          newUser
-            .save()
-            .then((savedUser) => {
-              console.log(savedUser);
-              sgMail.setApiKey(key);
-              const msg = {
-                to: savedUser.email, // Change to your recipient
-                from: "developersavenue@gmail.com", // Change to your verified sender
-                subject: "SmileForTheNeedaid Success Registeration Message",
-                text: `
-            Thank You Very Much @${savedUser.name} For Joining SmileForTheNeedAid Foundation.\n
-We Hope To Do More Together With You For The Needy,With Your Loyal Support,This Wonderful Initiative\n
- Will Thrive And Will Continue To Exist.\nYou Can Login With Your
- Credentials As Our Pateron After We Review Your Form,We Will Send You Another Email After Review,Until Then,You Cannot Login. Any Mistakes You Did During Registeration Will Be Modified By Our Admins,Contact Them On Whatsapp.\nThank You Once Again For 
- Joining The Family Cheese!! #SmileForTheNeedAid™.\n\nAll Rights-SFTNA Reserved ©2020.
-             
-              YOUR NAME: ${savedUser.name}
-              YOUR EMAIL: ${savedUser.email}
-              YOUR PHONEno.: ${savedUser.phoneNumber}
-              YOUR LOCATION: ${savedUser.location}`, // html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-              };
-              sgMail
-                .send(msg)
-                .then(() => {
-                  console.log("Email sent");
-                  req.flash(
-                    "success_msg",
-                    `You Have Successfully Registered as ${savedUser.name} And Can Login.Check Your Email For Confirmation`
-                  );
-                  res.redirect("/login");
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-            })
-            .catch((err) => console.log(err));
-        }
-      })
-    );
+ 
   }
 });
 

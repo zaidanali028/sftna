@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col mb-3">
         <div class="card">
-            <form action="/admin/edituser/<%=user._id%>" method="POST" enctype="multipart/form-data">
+            <form action="/admin/edituser/<%=user._id%>" method="POST" enctype="multipart/form-data"id="myForm">
           <div class="card-body">
             <div class="e-profile">
               <div class="row">
@@ -19,7 +19,7 @@
                   <div class="mx-auto" style="width: 140px;">
                     <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
                       <%  if(user.uploader){%>
-                      <img src="/uploads/<%=user.uploader%>" alt="" width="136px" height="136px">
+                      <img src="<%=user.uploader%>" alt="" width="136px" height="136px">
                       <%  }else{%>
                       No Picture Currently For This User
                       <%  } %>
@@ -107,7 +107,7 @@
                     
                     <div class="row">
                       <div class="col d-flex justify-content-end">
-                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                        <button class="btn btn-primary" type="submit" id="disableMe">Save Changes</button>
                     </form>
                       </div>
                     </div>

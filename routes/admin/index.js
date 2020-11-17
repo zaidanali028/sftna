@@ -10,8 +10,12 @@ const Questionaire = require("../../models/Questionaire");
 const {ensureAuthenticated}=require('../../config/auth')
 const {adminAuth}=require('../../config/adminAuth')
 const key =process.env.SENDGRID_KEY
-
-  
+const cloudinary=require('cloudinary').v2
+cloudinary.config({
+  cloud_name:process.env.CLOUD_NAME,
+  api_key:process.env.CLOUD_API_KEY,
+  api_secret:process.env.CLOUD_API_SECRET
+})
 
 router.get("/",ensureAuthenticated,adminAuth ,(req, res) => {
   const Data = [
@@ -666,36 +670,43 @@ router.post("/edituser/:id",ensureAuthenticated,adminAuth, (req, res) => {
   if (isNotEmpty(req.files)) {
     const fileObject = req.files.uploader;
     console.log(fileObject);
-    fileName = new Date().getSeconds() + "-" + fileObject.name;
-    //the new Date().getSeconds+'-'+ is there to prevent duplicate picturename
-    fileObject.mv("./public/uploads/" + fileName, (err) => {
-      if (err) console.log(err);
-      console.log("has something");
-    });
-  } else {
-    console.log("has nothing");
-  }
+    cloudinary.uploader.upload(fileObject.tempFilePath,(err,result)=>{
+      fileName=result.url
+      console.log(fileName)
+      User.findByIdAndUpdate(
+        { _id: userId },
+        {
+          $set: {
+            name,
+            email,
+            sex,
+            location,
+            reason,
+            phoneNumber,
+            uploader: fileName,
+          },
+        }
+      ).then((userUpdate) => {
+        req.flash(
+          "success_msg",
+          `Successfully Updated ${userUpdate.name}'s Profile`
+        );
+        res.redirect("/admin/payments");
+      });
+     // console.log({'result':result.url})
+    })
+  //   fileName = new Date().getSeconds() + "-" + fileObject.name;
+  //   //the new Date().getSeconds+'-'+ is there to prevent duplicate picturename
+  //   fileObject.mv("./public/img/" + fileName, (err) => {
+  //     if (err) console.log(err);
+  //     console.log("has something");
+  //   });
+   } 
+   else {
+     console.log("has nothing");
+   }
 
-  User.findByIdAndUpdate(
-    { _id: userId },
-    {
-      $set: {
-        name,
-        email,
-        sex,
-        location,
-        reason,
-        phoneNumber,
-        uploader: fileName,
-      },
-    }
-  ).then((userUpdate) => {
-    req.flash(
-      "success_msg",
-      `Successfully Updated ${userUpdate.name}'s Profile`
-    );
-    res.redirect("/admin/payments");
-  });
+  
 });
 router.get('/logout',(req,res)=>{
   req.logOut()

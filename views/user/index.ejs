@@ -10,7 +10,7 @@
 
         <div class="col-md-6">
             <%if(user.uploader){ %>
-          <img class="img-fluid rounded-left" src="/uploads/<%=user.uploader%>" alt="project image">
+          <img class="img-fluid rounded-left" src="<%=user.uploader%>" alt="project image">
           <% }else{ %>
           <img class="img-fluid rounded-left" src="/img/sftna.jpg" alt="pateron image">
           <% }%>
@@ -74,7 +74,7 @@
       
               <div class="col-md-6">
                   <%if(user.uploader){ %>
-                <img class="img-fluid rounded-left" src="/uploads/<%=user.uploader%>" alt="project image">
+                <img class="img-fluid rounded-left" src="<%=user.uploader%>" alt="project image">
                 <% }else{ %>
                 <img class="img-fluid rounded-left" src="/img/sftna.jpg" alt="project image">
                 <% }%>
